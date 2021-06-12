@@ -1,23 +1,39 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Alert from '@material-ui/lab/Alert';
 import Button from '@material-ui/core/Button';
+
 import { Field, Form, FormOrientation, Divider } from './styles';
+
+import { useAuth } from '~/contexts/AuthContext';
 
 export default function FormSignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleEmail = (event) => {
-    setEmail(event.target.value);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  const { logIn } = useAuth();
+  const history = useHistory();
+
+  const handleSignIn = async (e) => {
+    e.preventDefault();
+    try {
+      setError('');
+      setLoading(true);
+      await logIn(email, password);
+      history.push('/dashboard');
+    } catch {
+      setLoading(false);
+      return setError('Usuário ou senha inválidos.');
+    }
+    setLoading(false);
+    return false;
   };
 
-  const handlePassword = (event) => {
-    setPassword(event.target.value);
-  };
-
-  const handleSignIn = () => {
-    alert(email + password);
-  };
   return (
     <FormOrientation>
       <h2>Fazer Login</h2>
@@ -30,7 +46,7 @@ export default function FormSignIn() {
           size="small"
           type="email"
           value={email}
-          onChange={handleEmail}
+          onChange={(e) => setEmail(e.target.value)}
         />
       </Form>
       <Form>
@@ -41,12 +57,16 @@ export default function FormSignIn() {
           size="small"
           type="password"
           value={password}
-          onChange={handlePassword}
+          onChange={(e) => setPassword(e.target.value)}
         />
       </Form>
       <Button variant="contained" color="secondary" onClick={handleSignIn}>
         Login
       </Button>
+      <br />
+      {loading && <CircularProgress color="secondary" />}
+
+      {error && <Alert severity="error">{error}</Alert>}
       <br />
       <p>
         Ainda não tem conta? <a href="/cadastro">Faça o cadastro.</a>

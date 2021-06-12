@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import Grid from '@material-ui/core/Grid';
+
 import Box from '@material-ui/core/Box';
+import Grid from '@material-ui/core/Grid';
 
 export const Content = styled(Box)`
   min-height: 100vh;
@@ -19,10 +20,4 @@ export const GridContainer = styled(Grid)`
   h2 {
     padding: 5px;
   }
-`;
-
-export const Logo = styled.img`
-  height: 200px;
-  width: 450px;
-  padding: 20px;
 `;
