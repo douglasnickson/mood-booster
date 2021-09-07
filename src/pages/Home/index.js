@@ -5,8 +5,8 @@ import Container from '@material-ui/core/Container';
 
 import { Content, GridContainer, Logo } from './styles';
 
-import FormRecommendations from '../../components/FormRecommendations';
-import FormSignIn from '../../components/FormSignIn';
+import FormRecommendations from '../../components/Search';
+import FormSignIn from '../../components/SignIn';
 
 import logo from '~/assets/logo.png';
 

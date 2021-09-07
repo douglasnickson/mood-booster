@@ -6,6 +6,7 @@ import SignUp from '~/pages/SignUp';
 import Dashboard from '~/pages/Dashboard';
 
 import PrivateRoute from './components/Auth/PrivateRoute';
+import GlobalStyle from './styles/global';
 
 export default function Routes() {
   return (
@@ -13,6 +14,7 @@ export default function Routes() {
       <Route path="/" exact component={Home} />
       <Route path="/cadastro" exact component={SignUp} />
       <PrivateRoute path="/dashboard" exact component={Dashboard} />
+      <GlobalStyle />
     </Switch>
   );
 }

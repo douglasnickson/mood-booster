@@ -6,7 +6,7 @@ import { Content, GridContainer, Logo } from './styles';
 
 import logo from '~/assets/logo.png';
 
-import FormSignUp from '~/components/FormSignUp';
+import FormSignUp from '~/components/SignUp';
 
 export default function SignUp() {
   return (

@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
+
 import Button from '@material-ui/core/Button';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 
 import { SelectItem, Form, FormOrientation, Divider } from './styles';
+
+import TmdbService from '../../services/TmdbService';
 
 export default function FormRecommendations() {
   const [mood, setMood] = useState('');
@@ -17,8 +20,12 @@ export default function FormRecommendations() {
     setCategory(event.target.value);
   };
 
-  const handleRecommendations = () => {
-    alert(mood + category);
+  const handleRecommendations = async () => {
+    const tmdbService = new TmdbService();
+    // eslint-disable-next-line no-console
+    console.log(await tmdbService.getMovies(mood));
+    // eslint-disable-next-line no-console
+    console.log(await tmdbService.getTvShows(mood));
   };
 
   return (
@@ -39,14 +46,12 @@ export default function FormRecommendations() {
           <MenuItem value="" disabled>
             Selecione uma opção
           </MenuItem>
+          <MenuItem value="Euforico">Euforico</MenuItem>
           <MenuItem value="Feliz">Feliz</MenuItem>
+          <MenuItem value="Tranquilo">Tranquilo</MenuItem>
+          <MenuItem value="Ansioso">Ansioso</MenuItem>
           <MenuItem value="Triste">Triste</MenuItem>
           <MenuItem value="Irritado">Irritado</MenuItem>
-          <MenuItem value="Tenso">Tenso</MenuItem>
-          <MenuItem value="Tranquilo">Tranquilo</MenuItem>
-          <MenuItem value="Preocupado">Preocupado</MenuItem>
-          <MenuItem value="Ansioso">Ansioso</MenuItem>
-          <MenuItem value="Euforico">Euforico</MenuItem>
           <MenuItem value="Depressivo">Depressivo</MenuItem>
         </SelectItem>
       </Form>
@@ -64,11 +69,11 @@ export default function FormRecommendations() {
           <MenuItem value="" disabled>
             Selecione uma opção
           </MenuItem>
-          <MenuItem value="Filmes">Filmes</MenuItem>
-          <MenuItem value="Séries">Séries</MenuItem>
-          <MenuItem value="Livros">Livros</MenuItem>
-          <MenuItem value="Músicas">Músicas</MenuItem>
-          <MenuItem value="Todas">Todas as opções</MenuItem>
+          <MenuItem value="movies">Filmes</MenuItem>
+          <MenuItem value="tvshow">Séries</MenuItem>
+          <MenuItem value="books">Livros</MenuItem>
+          <MenuItem value="music">Músicas</MenuItem>
+          <MenuItem value="all">Todas as opções</MenuItem>
         </SelectItem>
       </Form>
       <Button
