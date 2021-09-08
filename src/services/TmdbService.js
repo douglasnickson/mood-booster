@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-
 import axios from 'axios';
 import { getGenresByMood, getRandomItems } from '../utils/Utils';
 

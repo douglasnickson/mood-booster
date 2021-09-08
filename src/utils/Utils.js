@@ -19,6 +19,9 @@ export function getGenresByMood(mood) {
     genres.push({ name: 'Documentário', id: 99 });
     genres.push({ name: 'História', id: 36 });
     genres.push({ name: 'Cinema TV', id: 10770 });
+    genres.push({ name: 'Comédia', id: 35 });
+    genres.push({ name: 'Música', id: 10402 });
+    genres.push({ name: 'Animação', id: 16 });
   } else {
     genres.push({ name: 'Animação', id: 16 });
     genres.push({ name: 'Comédia', id: 35 });
@@ -26,6 +29,35 @@ export function getGenresByMood(mood) {
     genres.push({ name: 'Música', id: 10402 });
     genres.push({ name: 'Romance', id: 10749 });
     genres.push({ name: 'Kids', id: 10762 });
+  }
+
+  return genres;
+}
+
+export function getMusicGenresByMood(mood) {
+  const genres = [];
+  if (mood === 'Euforico' || mood === 'Feliz') {
+    genres.push({ name: 'rock' });
+    genres.push({ name: 'electronic' });
+    genres.push({ name: 'heavy metal' });
+    genres.push({ name: 'pop' });
+    genres.push({ name: 'hard rock' });
+    genres.push({ name: '80s' });
+    genres.push({ name: 'dance' });
+  } else if (mood === 'Tranquilo') {
+    genres.push({ name: 'alternative' });
+    genres.push({ name: 'folk' });
+    genres.push({ name: 'Progressive rock' });
+    genres.push({ name: 'acoustic' });
+    genres.push({ name: 'indie' });
+    genres.push({ name: '90s' });
+  } else {
+    genres.push({ name: 'jazz' });
+    genres.push({ name: 'folk' });
+    genres.push({ name: 'instrumental' });
+    genres.push({ name: 'Classical' });
+    genres.push({ name: 'blues' });
+    genres.push({ name: 'acoustic' });
   }
 
   return genres;

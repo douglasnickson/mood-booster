@@ -7,6 +7,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import { SelectItem, Form, FormOrientation, Divider } from './styles';
 
 import TmdbService from '../../services/TmdbService';
+import LastFmService from '../../services/LastFmService';
 
 export default function FormRecommendations() {
   const [mood, setMood] = useState('');
@@ -22,10 +23,13 @@ export default function FormRecommendations() {
 
   const handleRecommendations = async () => {
     const tmdbService = new TmdbService();
+    const lastfmService = new LastFmService();
     // eslint-disable-next-line no-console
     console.log(await tmdbService.getMovies(mood));
     // eslint-disable-next-line no-console
     console.log(await tmdbService.getTvShows(mood));
+    // eslint-disable-next-line no-console
+    console.log(await lastfmService.getTopArtists(mood));
   };
 
   return (
