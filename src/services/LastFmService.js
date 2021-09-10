@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { getMusicGenresByMood, getRandomItems } from '../utils/Utils';
+import { getMusicGenresByMood } from '../utils/Utils';
+import TheMusicDBService from './TheMusicDBService';
 
 const BASE_URL = 'http://ws.audioscrobbler.com/2.0';
 const API_KEY = '43baeba4ee73c2e487388ebcb48abc1a';
@@ -26,10 +27,12 @@ class LastFmService {
       })
     ).then((results) => {
       const artists = [];
+      const theMusicDbService = new TheMusicDBService();
       results.forEach((result) => {
         artists.push(...result);
       });
-      return getRandomItems(artists, 3);
+      const artistsWithInfo = theMusicDbService.getArtistInfo(artists);
+      return artistsWithInfo;
     });
   };
 }

@@ -63,6 +63,35 @@ export function getMusicGenresByMood(mood) {
   return genres;
 }
 
+export function getBookCategoryByMood(mood) {
+  const genres = [];
+  if (mood === 'Euforico' || mood === 'Feliz') {
+    genres.push({ name: 'fiction' });
+    genres.push({ name: 'true+crime' });
+    genres.push({ name: 'young+adult+fiction' });
+    genres.push({ name: 'action' });
+    genres.push({ name: 'war' });
+  } else if (mood === 'Tranquilo') {
+    genres.push({ name: 'history' });
+    genres.push({ name: 'drama' });
+    genres.push({ name: 'biography+autobiography' });
+    genres.push({ name: 'literary+criticism' });
+    genres.push({ name: 'philosophy' });
+    genres.push({ name: 'social+science' });
+  } else {
+    genres.push({ name: 'self+help' });
+    genres.push({ name: 'religion' });
+    genres.push({ name: 'poetry' });
+    genres.push({ name: 'humor' });
+    genres.push({ name: 'comedy' });
+    genres.push({ name: 'health+fitness' });
+    genres.push({ name: 'body+mind+spirit' });
+    genres.push({ name: 'family+relationships' });
+  }
+
+  return genres;
+}
+
 export function getRandomItems(arr, n) {
   const result = new Array(n);
   let len = arr.length;
@@ -74,5 +103,46 @@ export function getRandomItems(arr, n) {
     result[n] = arr[x in taken ? taken[x] : x];
     taken[x] = --len in taken ? taken[len] : len;
   }
+  return result;
+}
+
+function parseMoviesAndShows(items, session) {
+  const data = [];
+
+  if (!items) return { session, data };
+
+  items.forEach((item) => {
+    const { overview, title, poster_path } = item;
+    data.push({
+      description: overview,
+      title,
+      image: poster_path,
+    });
+  });
+  return { session, data };
+}
+
+function parseBooks(items, session) {
+  const data = [];
+  if (!items) return { session, data };
+
+  items.forEach((item) => {
+    const { description, title, imageLinks } = item;
+    data.push({
+      description,
+      title,
+      image: imageLinks.thumbnail,
+    });
+  });
+  return { session, data };
+}
+
+export function parseData(movies, tvshows, musics, books) {
+  const result = [];
+
+  result.push(parseMoviesAndShows(movies, 'Filmes'));
+  result.push(parseMoviesAndShows(tvshows, 'Tv Shows'));
+  result.push({ session: 'Músicas', data: musics });
+  result.push(parseBooks(books, 'Livros'));
   return result;
 }

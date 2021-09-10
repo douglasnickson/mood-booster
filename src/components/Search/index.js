@@ -8,6 +8,9 @@ import { SelectItem, Form, FormOrientation, Divider } from './styles';
 
 import TmdbService from '../../services/TmdbService';
 import LastFmService from '../../services/LastFmService';
+import GoogleBooksService from '../../services/GoogleBooksService';
+
+import { parseData } from '../../utils/Utils';
 
 export default function FormRecommendations() {
   const [mood, setMood] = useState('');
@@ -24,12 +27,36 @@ export default function FormRecommendations() {
   const handleRecommendations = async () => {
     const tmdbService = new TmdbService();
     const lastfmService = new LastFmService();
+    const googleBooksService = new GoogleBooksService();
+
+    if (!mood && !category) {
+      alert('Você deve informar seu humor e selecionar uma categoria');
+      return;
+    }
+
+    const moviesItems = [];
+    const showsItems = [];
+    const musicsItems = [];
+    const booksItems = [];
+
+    if (category === 'movies') {
+      moviesItems.push(...(await tmdbService.getMovies(mood)));
+    } else if (category === 'tvshows') {
+      showsItems.push(...(await tmdbService.getTvShows(mood)));
+    } else if (category === 'musics') {
+      musicsItems.push(...(await lastfmService.getTopArtists(mood)));
+    } else if (category === 'books') {
+      booksItems.push(...(await googleBooksService.getBooks(mood)));
+    } else {
+      moviesItems.push(...(await tmdbService.getMovies(mood)));
+      showsItems.push(...(await tmdbService.getTvShows(mood)));
+      musicsItems.push(...(await lastfmService.getTopArtists(mood)));
+      booksItems.push(...(await googleBooksService.getBooks(mood)));
+    }
+
+    const data = parseData(moviesItems, showsItems, musicsItems, booksItems);
     // eslint-disable-next-line no-console
-    console.log(await tmdbService.getMovies(mood));
-    // eslint-disable-next-line no-console
-    console.log(await tmdbService.getTvShows(mood));
-    // eslint-disable-next-line no-console
-    console.log(await lastfmService.getTopArtists(mood));
+    console.log(data);
   };
 
   return (
@@ -74,9 +101,9 @@ export default function FormRecommendations() {
             Selecione uma opção
           </MenuItem>
           <MenuItem value="movies">Filmes</MenuItem>
-          <MenuItem value="tvshow">Séries</MenuItem>
+          <MenuItem value="tvshows">Séries</MenuItem>
           <MenuItem value="books">Livros</MenuItem>
-          <MenuItem value="music">Músicas</MenuItem>
+          <MenuItem value="musics">Músicas</MenuItem>
           <MenuItem value="all">Todas as opções</MenuItem>
         </SelectItem>
       </Form>
