@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import Button from '@material-ui/core/Button';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -13,6 +14,8 @@ import GoogleBooksService from '../../services/GoogleBooksService';
 import { parseData } from '../../utils/Utils';
 
 export default function FormRecommendations() {
+  const history = useHistory();
+
   const [mood, setMood] = useState('');
   const [category, setCategory] = useState('');
 
@@ -55,8 +58,7 @@ export default function FormRecommendations() {
     }
 
     const data = parseData(moviesItems, showsItems, musicsItems, booksItems);
-    // eslint-disable-next-line no-console
-    console.log(data);
+    history.push('/recomendacoes', { data });
   };
 
   return (

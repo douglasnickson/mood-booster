@@ -116,7 +116,7 @@ function parseMoviesAndShows(items, session) {
     data.push({
       description: overview,
       title,
-      image: poster_path,
+      image: `https://image.tmdb.org/t/p/w300${poster_path}`,
     });
   });
   return { session, data };
