@@ -26,10 +26,10 @@ class TheMusicDBService {
         }
 
         const data = {
-          title: name,
-          genre,
-          description: biography,
-          image,
+          title: name || '',
+          genre: genre || '',
+          description: biography || '',
+          image: image || '',
         };
 
         return data;

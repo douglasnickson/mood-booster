@@ -1,5 +1,8 @@
+/* eslint-disable no-console */
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+
+import firebase from 'firebase/app';
 
 import Button from '@material-ui/core/Button';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -11,13 +14,19 @@ import TmdbService from '../../services/TmdbService';
 import LastFmService from '../../services/LastFmService';
 import GoogleBooksService from '../../services/GoogleBooksService';
 
+import { useAuth } from '~/contexts/AuthContext';
+import { db } from '~config/firebase';
+
 import { parseData } from '../../utils/Utils';
 
 export default function FormRecommendations() {
-  const history = useHistory();
+  const { currentUser } = useAuth();
 
   const [mood, setMood] = useState('');
   const [category, setCategory] = useState('');
+
+  const history = useHistory();
+  const ref = db.collection('recommendations');
 
   const handleMood = (event) => {
     setMood(event.target.value);
@@ -25,6 +34,27 @@ export default function FormRecommendations() {
 
   const handleCategory = (event) => {
     setCategory(event.target.value);
+  };
+
+  const saveRecommendations = (data) => {
+    if (!currentUser) {
+      return;
+    }
+
+    const timestamp = firebase.firestore.Timestamp.fromDate(new Date());
+    ref
+      .add({
+        uid: currentUser.uid,
+        createdAt: new Date().toISOString(),
+        timestamp,
+        data,
+      })
+      .then(() => {
+        console.log('Recomendações cadastradas com sucesso.');
+      })
+      .catch((err) => {
+        console.error(`Ocorreu um erro ao cadastrar as recomendações. ${err}`);
+      });
   };
 
   const handleRecommendations = async () => {
@@ -58,6 +88,7 @@ export default function FormRecommendations() {
     }
 
     const data = parseData(moviesItems, showsItems, musicsItems, booksItems);
+    saveRecommendations(data);
     history.push('/recomendacoes', { data });
   };
 

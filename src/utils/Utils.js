@@ -114,8 +114,8 @@ function parseMoviesAndShows(items, session) {
   items.forEach((item) => {
     const { overview, title, poster_path } = item;
     data.push({
-      description: overview,
-      title,
+      description: overview || '',
+      title: title || '',
       image: `https://image.tmdb.org/t/p/w300${poster_path}`,
     });
   });
@@ -129,9 +129,9 @@ function parseBooks(items, session) {
   items.forEach((item) => {
     const { description, title, imageLinks } = item;
     data.push({
-      description,
-      title,
-      image: imageLinks.thumbnail,
+      description: description || '',
+      title: title || '',
+      image: imageLinks.thumbnail || '',
     });
   });
   return { session, data };
