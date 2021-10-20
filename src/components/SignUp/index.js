@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Alert from '@material-ui/lab/Alert';
 
-import { Field, Form, FormOrientation, Divider } from './styles';
+import { Field, Form, FormOrientation } from './styles';
 
 import { useAuth } from '~/contexts/AuthContext';
 import { createUser } from '~/services/UserService';
@@ -35,7 +36,6 @@ export default function FormSignUp() {
   return (
     <FormOrientation>
       <h2>Fazer Cadastro</h2>
-      <Divider />
       <Form>
         <Field
           id="input-name"
@@ -97,7 +97,7 @@ export default function FormSignUp() {
       )}
       <br />
       <p>
-        Já tem conta? <a href="/">Faça o login.</a>
+        Já tem conta? <Link to="/">Faça o login.</Link>
       </p>
       <br />
     </FormOrientation>

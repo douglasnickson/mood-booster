@@ -1,14 +1,14 @@
 /* eslint-disable no-console */
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import firebase from 'firebase/app';
 
-import Button from '@material-ui/core/Button';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 
-import { SelectItem, Form, FormOrientation, Divider } from './styles';
+import { SelectItem, Form, FormOrientation, BtSearch } from './styles';
 
 import TmdbService from '../../services/TmdbService';
 import LastFmService from '../../services/LastFmService';
@@ -19,7 +19,7 @@ import { db } from '~config/firebase';
 
 import { parseData } from '../../utils/Utils';
 
-export default function FormRecommendations() {
+export default function FormRecommendations({ handleLogin }) {
   const { currentUser } = useAuth();
 
   const [mood, setMood] = useState('');
@@ -95,7 +95,6 @@ export default function FormRecommendations() {
   return (
     <FormOrientation>
       <h2>Buscar Recomendações</h2>
-      <Divider />
       <Form>
         <InputLabel shrink id="mood-label">
           <b>Como você está se sentindo?</b>
@@ -140,13 +139,27 @@ export default function FormRecommendations() {
           <MenuItem value="all">Todas as opções</MenuItem>
         </SelectItem>
       </Form>
-      <Button
+      <BtSearch
         variant="contained"
         color="secondary"
         onClick={handleRecommendations}
       >
         Buscar
-      </Button>
+      </BtSearch>
+      <p>
+        Deseja salvar as recomendações?{' '}
+        <span onClick={() => handleLogin()} aria-hidden="true">
+          Faça o login.
+        </span>
+      </p>
     </FormOrientation>
   );
 }
+
+FormRecommendations.propTypes = {
+  handleLogin: PropTypes.func,
+};
+
+FormRecommendations.defaultProps = {
+  handleLogin: null,
+};

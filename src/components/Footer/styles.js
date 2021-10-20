@@ -1,12 +1,14 @@
 import styled from 'styled-components';
 
-import Box from '@material-ui/core/Box';
-
-export const Container = styled(Box)`
-  height: 80% !important;
+export const Container = styled.footer`
+  height: 2rem;
+  color: var(--white);
+  background: var(--default);
+  text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
   position: absolute;
+  bottom: 0;
   width: 100%;
 `;

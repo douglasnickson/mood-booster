@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Alert from '@material-ui/lab/Alert';
 import Button from '@material-ui/core/Button';
 
-import { Field, Form, FormOrientation, Divider } from './styles';
+import { Field, Form, FormOrientation } from './styles';
 
 import { useAuth } from '~/contexts/AuthContext';
 
-export default function FormSignIn() {
+export default function FormSignIn({ handleLogin }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -37,7 +38,6 @@ export default function FormSignIn() {
   return (
     <FormOrientation>
       <h2>Fazer Login</h2>
-      <Divider />
       <Form>
         <Field
           id="input-email"
@@ -69,8 +69,21 @@ export default function FormSignIn() {
       {error && <Alert severity="error">{error}</Alert>}
       <br />
       <p>
-        Ainda não tem conta? <a href="/cadastro">Faça o cadastro.</a>
+        Ainda não tem conta? <Link to="/cadastro">Faça o cadastro.</Link>
+      </p>
+      <p>
+        <span onClick={() => handleLogin()} aria-hidden="true">
+          Voltar
+        </span>
       </p>
     </FormOrientation>
   );
 }
+
+FormSignIn.propTypes = {
+  handleLogin: PropTypes.func,
+};
+
+FormSignIn.defaultProps = {
+  handleLogin: null,
+};

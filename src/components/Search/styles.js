@@ -1,34 +1,60 @@
 import styled from 'styled-components';
 import Select from '@material-ui/core/Select';
 import FormControl from '@material-ui/core/FormControl';
-import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 export const FormOrientation = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  border: 1px solid #ccc;
-  min-height: 50vh;
+  background: var(--white);
+  height: 350px;
+  border: 1px solid var(--default);
   border-radius: 10px;
-  box-shadow: 3px 4px rgba(0, 0, 0, 0.2);
+
+  h2 {
+    font-size: 18px;
+    text-align: center;
+    color: var(--gray100);
+    background-color: var(--default);
+    border-bottom: 1px solid var(--gray300);
+    border-radius: 10px 10px 0 0;
+    padding: 15px;
+    width: 100%;
+  }
+
+  p {
+    font-size: 12px;
+    color: var(--gray700);
+    margin: 10px 10px;
+    font-weight: bold;
+
+    span {
+      cursor: pointer;
+      color: var(--default);
+    }
+
+    span:hover {
+      color: var(--gray300);
+    }
+  }
 `;
 
 export const SelectItem = styled(Select)`
-  width: 250px;
+  width: 300px;
   padding: 5px;
+  margin: 0 15px;
 `;
 
 export const Form = styled(FormControl)`
-  margin: 10px 0 30px 0;
+  width: 100%;
+  b {
+    color: var(--default);
+    margin: 0 15px;
+  }
 `;
 
-export const Field = styled(TextField)`
-  margin: 5px 0 10px 0;
-`;
-
-export const Divider = styled.div`
-  width: 60%;
-  border: 1px dashed #006699;
-  margin: 20px 0;
+export const BtSearch = styled(Button)`
+  margin-bottom: 2px !important;
 `;
