@@ -7,6 +7,7 @@ import firebase from 'firebase/app';
 
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import { SelectItem, Form, FormOrientation, BtSearch } from './styles';
 
@@ -24,6 +25,7 @@ export default function FormRecommendations({ handleLogin }) {
 
   const [mood, setMood] = useState('');
   const [category, setCategory] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const history = useHistory();
   const ref = db.collection('recommendations');
@@ -67,6 +69,8 @@ export default function FormRecommendations({ handleLogin }) {
       return;
     }
 
+    setLoading(true);
+
     const moviesItems = [];
     const showsItems = [];
     const musicsItems = [];
@@ -86,6 +90,8 @@ export default function FormRecommendations({ handleLogin }) {
       musicsItems.push(...(await lastfmService.getTopArtists(mood)));
       booksItems.push(...(await googleBooksService.getBooks(mood)));
     }
+
+    setLoading(true);
 
     const data = parseData(moviesItems, showsItems, musicsItems, booksItems);
     saveRecommendations(data);
@@ -146,6 +152,8 @@ export default function FormRecommendations({ handleLogin }) {
       >
         Buscar
       </BtSearch>
+      <br />
+      {loading && <CircularProgress color="secondary" />}
       <p>
         Deseja salvar as recomendações?{' '}
         <span onClick={() => handleLogin()} aria-hidden="true">

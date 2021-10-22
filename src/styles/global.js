@@ -25,6 +25,7 @@ export default createGlobalStyle`
     html {
       font-size: 93.75% !important;
       height: 100%;
+      min-height: 100%;
     }
   }
 
@@ -32,6 +33,8 @@ export default createGlobalStyle`
     html {
       font-size: 87.5% !important;
       height: 100%;
+      min-height: 100%;
+
     }
   }
 
@@ -40,6 +43,7 @@ export default createGlobalStyle`
     color: var(--gray850);
     -webkit-font-smoothing: antialiased;
     height: 100%;
+    min-height: 100%;
   }
 
   body, input, textarea, select, button {

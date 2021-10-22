@@ -12,9 +12,9 @@ export default function Header() {
             Mood <span>Booster</span>
           </h1>
           <nav>
-            <Link to="/">Home</Link>
-            <Link to="/cadastro">Cadastro</Link>
+            <Link to="/">HOME</Link>
             <Link to="/faq">FAQ</Link>
+            <Link to="/cadastro">CADASTRO</Link>
           </nav>
         </Content>
       </Container>
