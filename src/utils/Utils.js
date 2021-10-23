@@ -146,3 +146,10 @@ export function parseData(movies, tvshows, musics, books) {
   result.push(parseBooks(books, 'Livros'));
   return result;
 }
+
+export function limitString(str, limit) {
+  if (str.length > limit) {
+    return `${str.substring(0, limit)}...`;
+  }
+  return str;
+}

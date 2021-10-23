@@ -19,7 +19,12 @@ export default function FormSignUp() {
   const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const { signUp } = useAuth();
+  const resetForm = () => {
+    setName('');
+    setEmail('');
+    setPassword('');
+    setConfirmPassword('');
+  };
 
   const handleSignUp = (e) => {
     e.preventDefault();
@@ -31,7 +36,7 @@ export default function FormSignUp() {
     }
 
     const user = { name, email, password };
-    return createUser(user, setError, setSuccess, setLoading, signUp);
+    return createUser(user, setError, setSuccess, setLoading, resetForm);
   };
   return (
     <FormOrientation>

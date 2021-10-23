@@ -26,13 +26,13 @@ export default function FormSignIn({ handleLogin }) {
       setError('');
       setLoading(true);
       await logIn(email, password);
-      history.push('/dashboard');
+      setLoading(false);
+
+      return history.push('/dashboard');
     } catch {
       setLoading(false);
       return setError('Usuário ou senha inválidos.');
     }
-    setLoading(false);
-    return false;
   };
 
   return (

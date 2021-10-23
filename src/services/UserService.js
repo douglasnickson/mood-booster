@@ -13,7 +13,13 @@ const createNewConnection = () => {
   return secondaryConnection;
 };
 
-export function createProfile(user, setError, setSuccess, setLoading) {
+export function createProfile(
+  user,
+  setError,
+  setSuccess,
+  setLoading,
+  resetForm
+) {
   try {
     const timestamp = firebase.firestore.Timestamp.fromDate(new Date());
     return ref
@@ -27,10 +33,14 @@ export function createProfile(user, setError, setSuccess, setLoading) {
       })
       .then(() => {
         setLoading(false);
+        setError('');
+        resetForm();
+
         return setSuccess('Usuário criado com sucesso.');
       })
       .catch((err) => {
         setLoading(false);
+        setSuccess('');
         return setError(
           `Ocorreu um erro ao criar o perfil do usuário. ${err.code}`
         );
@@ -42,7 +52,7 @@ export function createProfile(user, setError, setSuccess, setLoading) {
   }
 }
 
-export function createUser(user, setError, setSuccess, setLoading, signUp) {
+export function createUser(user, setError, setSuccess, setLoading, resetForm) {
   try {
     const secondaryConnection = createNewConnection();
     return secondaryConnection
@@ -50,14 +60,22 @@ export function createUser(user, setError, setSuccess, setLoading, signUp) {
       .createUserWithEmailAndPassword(user.email, user.password)
       .then((res) => {
         const userWithUid = { uid: res.user.uid, ...user };
-        return createProfile(userWithUid, setError, setSuccess, setLoading);
+        return createProfile(
+          userWithUid,
+          setError,
+          setSuccess,
+          setLoading,
+          resetForm
+        );
       })
       .catch((err) => {
         setLoading(false);
+        setSuccess('');
         return setError(`Ocorreu um erro ao criar o usuário. ${err.code}`);
       });
   } catch (err) {
     setLoading(false);
+    setSuccess('');
     return setError(`Ocorreu um erro ao criar o usuário. ${err.code}`);
   }
 }

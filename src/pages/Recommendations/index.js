@@ -13,9 +13,11 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 
 import { Container, MainCard } from './styles';
+import { limitString } from '~/utils/Utils';
 
 export default function Recommendations() {
   const location = useLocation();
+
   const { data } = location.state;
 
   const [content, setContent] = useState([]);
@@ -32,7 +34,7 @@ export default function Recommendations() {
 
           {content.length > 0 &&
             content.map((item) => (
-              <Accordion key={item.session}>
+              <Accordion key={item.session} style={{ width: '100%' }}>
                 <AccordionSummary
                   aria-controls="panel1a-content"
                   id="panel1a-header"
@@ -42,8 +44,14 @@ export default function Recommendations() {
                 <AccordionDetails>
                   <Grid container spacing={2}>
                     {item.data &&
-                      item.data.map((session) => (
-                        <Grid item xs={4}>
+                      item.data.map((session, i) => (
+                        <Grid
+                          item
+                          xs={4}
+                          key={`${item.session}-${Math.floor(
+                            Math.random() * 99999
+                          )}`}
+                        >
                           <Card xs={6} sm={6}>
                             <CardActionArea>
                               <CardMedia
@@ -66,13 +74,18 @@ export default function Recommendations() {
                                   componet="p"
                                   color="textSeconday"
                                 >
-                                  {session.description}
+                                  {limitString(session.description, 350)}
                                 </Typography>
                               </CardContent>
                             </CardActionArea>
                           </Card>
                         </Grid>
                       ))}
+                    {item.data.length < 1 && (
+                      <small style={{ padding: '5px' }}>
+                        Não foi obtido nenhuma recomendação nesta categoria.
+                      </small>
+                    )}
                   </Grid>
                 </AccordionDetails>
               </Accordion>
