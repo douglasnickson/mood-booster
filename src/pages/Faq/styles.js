@@ -2,11 +2,10 @@ import styled from 'styled-components';
 import Box from '@material-ui/core/Box';
 
 export const Container = styled(Box)`
-  height: 80% !important;
+  min-height: 86vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: absolute;
   width: 100%;
   margin-top: 10px;
 `;
@@ -19,7 +18,7 @@ export const Card = styled.div`
   background: var(--white);
   border: 1px solid var(--default);
   border-radius: 10px;
-  max-width: 550px;
+  max-width: 80%;
 
   h2 {
     font-size: 18px;

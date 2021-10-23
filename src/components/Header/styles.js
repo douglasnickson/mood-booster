@@ -68,5 +68,17 @@ export const Content = styled.div`
         line-height: 2rem;
       }
     }
+
+    button {
+      display: inline-block;
+      position: relative;
+      padding: 0 0.5rem;
+      height: 5rem;
+      line-height: 5rem;
+      color: var(--white);
+      transition: color 0.2s;
+      background: none;
+      border: none;
+    }
   }
 `;

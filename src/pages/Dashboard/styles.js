@@ -3,21 +3,35 @@ import styled from 'styled-components';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 
-export const Content = styled(Box)`
-  min-height: 100vh;
+export const Container = styled(Box)`
+  min-height: 87vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
 `;
 
-export const GridContainer = styled(Grid)`
-  background: #fff;
-  border: 1px solid #006699;
-  border-radius: 15px;
-  box-shadow: 6px 8px rgba(0, 0, 0, 0.2);
-  min-height: 20vh;
-  text-align: center;
-  color: #006699;
-  padding: 30px 30px;
+export const MainCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--white);
+  max-width: 1120px;
+  width: 80%;
+  border: 1px solid var(--default);
+  border-radius: 10px;
+  margin: 10px 10px;
 
   h2 {
-    padding: 5px;
+    font-size: 18px;
+    text-align: center;
+    color: var(--gray100);
+    background-color: var(--default);
+    border-bottom: 1px solid var(--gray300);
+    border-radius: 10px 10px 0 0;
+    padding: 15px;
+    width: 100%;
   }
 `;
