@@ -1,0 +1,19 @@
+[debug] [2021-11-07T21:40:07.978Z] ----------------------------------------------------------------------
+[debug] [2021-11-07T21:40:07.981Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\douglasnickson\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2021-11-07T21:40:07.981Z] CLI Version:   9.22.0
+[debug] [2021-11-07T21:40:07.982Z] Platform:      win32
+[debug] [2021-11-07T21:40:07.982Z] Node Version:  v14.17.5
+[debug] [2021-11-07T21:40:07.982Z] Time:          Sun Nov 07 2021 18:40:07 GMT-0300 (Horário Padrão de Brasília)
+[debug] [2021-11-07T21:40:07.982Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2021-11-07T21:40:08.050Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2021-11-07T21:40:08.050Z] > authorizing via signed-in user (douglasnickson1@gmail.com)
+[debug] [2021-11-07T21:40:08.050Z] [iam] checking project mood-booster-igti for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2021-11-07T21:40:08.053Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/mood-booster-igti:testIamPermissions  
+ {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2021-11-07T21:40:09.265Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Sun, 07 Nov 2021 21:40:09 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=737","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-11-07T21:40:09.269Z] > refreshing access token with scopes: []
+[debug] [2021-11-07T21:40:09.270Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2021-11-07T21:40:09.632Z] <<< HTTP RESPONSE 200 {"date":"Sun, 07 Nov 2021 21:40:10 GMT","cache-control":"no-cache, no-store, max-age=0, must-revalidate","expires":"Mon, 01 Jan 1990 00:00:00 GMT","pragma":"no-cache","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2021-11-07T21:40:09.651Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/mood-booster-igti [none]
