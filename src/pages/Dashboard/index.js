@@ -17,6 +17,8 @@ import { Container, MainCard } from './styles';
 import { useCollection } from '../../hooks/useFirestore';
 import { limitString } from '~/utils/Utils';
 
+import Icons from '../../components/Icons';
+
 export default function Dashboard() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -116,6 +118,7 @@ export default function Dashboard() {
                                             )}
                                           </Typography>
                                         </CardContent>
+                                        <Icons session={item.session} />
                                       </CardActionArea>
                                     </Card>
                                   </Grid>

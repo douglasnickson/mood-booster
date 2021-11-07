@@ -15,6 +15,8 @@ import CardContent from '@material-ui/core/CardContent';
 import { Container, MainCard } from './styles';
 import { limitString } from '~/utils/Utils';
 
+import Icons from '../../components/Icons';
+
 export default function Recommendations() {
   const location = useLocation();
 
@@ -77,6 +79,7 @@ export default function Recommendations() {
                                   {limitString(session.description, 350)}
                                 </Typography>
                               </CardContent>
+                              <Icons session={item.session} />
                             </CardActionArea>
                           </Card>
                         </Grid>
